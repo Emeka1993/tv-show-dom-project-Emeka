@@ -1,4 +1,5 @@
 //You can edit ALL of the code here
+
 function formattedEpisode(episode, nameAtStart) {
     let rootSeason = `${episode.season}`;
     let rootEpisode = `${episode.number}`;
@@ -15,10 +16,18 @@ function formattedEpisode(episode, nameAtStart) {
 
 let allEpisodes = [];
 
+
+
+
+
+
+
+
+
 function setup() {
     let headerElement = document.getElementsByTagName("header")[0];
 
-    headerElement.innerHTML = "";
+    //headerElement.innerHTML = "";
     createSearchInput();
 
     createEpisodesSelectionList(allEpisodes);
@@ -106,27 +115,55 @@ function searchEpisodes() {
     makePageForEpisodes(filteredEpisodes);
     let selectList = document.getElementsByClassName("select")[0];
     selectList.value = "Select an episode";
+    
+    
 }
 
 function createEpisodesSelectionList(listOfEpisodes) {
-    let selectList = document.createElement("select");
+    let selectList = document.getElementById("select");
     selectList.classList.add("select");
-    let headerElement = document.getElementsByTagName("header")[0];
-    headerElement.appendChild(selectList);
+    //let headerElement = document.getElementsByTagName("header")[0];
+    //headerElement.appendChild(selectList);
 
     let option = document.createElement("option");
     option.classList.add("option");
-    option.textContent = "Select an episode";
     selectList.appendChild(option);
+    
 
     for (let episode of listOfEpisodes) {
         let option = document.createElement("option");
         option.text = formattedEpisode(episode, false);
-        option.value = listOfEpisodes.indexOf(episode);
+        option.value = episode.name 
+        //console.log(episode.name)
+
         selectList.appendChild(option);
     }
-    selectList.addEventListener("change", selectOneEpisode);
+    selectList.addEventListener("change", selectOneEpisode)
+    // (event)=>{
+    //     console.log(event.target.value)
+    //     let sellected = listOfEpisodes.filter((e) => {
+    //         e.name === event.target.value 
+    //         })
+    //     //let s = [] 
+    //     //s.push(sellected) 
+    //     console.log(sellected)
+    //     makePageForEpisodes(sellected)
+    // });
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 function selectOneEpisode() {
     let listOfEpisodes = allEpisodes;
@@ -144,10 +181,41 @@ function selectOneEpisode() {
         let selectedEpisode = [];
         let index = selectList.value;
         let episodeObject = listOfEpisodes[index];
-        selectedEpisode.push(episodeObject);
+        selectedEpisode.push(episodeObject); console.log(episodeObject)
         makePageForEpisodes(selectedEpisode);
     }
 }
+
+    const getShows = getAllShows(); 
+    let showSelect = document.getElementById("show_select")
+    function showsAll(shows){
+       showSelect.classList.add("select");
+
+        let option = document.createElement("option");
+        option.classList.add("option");
+        option.textContent = "shows";
+        showSelect.appendChild(option);
+        
+   
+
+
+
+    shows.forEach(element => {
+    let option = document.createElement("option");
+    option.classList.add("option");
+    option.value = element.id 
+    option.textContent = element.name;
+    showSelect.appendChild(option);
+    
+        
+    });
+    showSelect.addEventListener("change",(event)=>{
+    let showid = event.target.value
+    fetchData(showid)
+    })
+}
+
+showsAll(getShows)
 
 // This is the fetch api
 const fetchData = (showID) => {
@@ -163,11 +231,14 @@ const fetchData = (showID) => {
 
         .then(function (episodeList) {
             allEpisodes = episodeList;
-            setup();
+            makePageForEpisodes(allEpisodes)
+            createEpisodesSelectionList(allEpisodes)
         })
         .catch((error) => {
             console.error("Error:", error);
         });
 };
 
-window.onload = fetchData(82);
+//window.onload = fetchData(82);
+
+window.onload = setup
