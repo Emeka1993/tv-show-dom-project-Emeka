@@ -36,7 +36,9 @@ function setup() {
 
 
 
+
 function makePageForEpisodes(episodeList) {
+    console.log("list",episodeList)
     let episodes = [];
     let rootElem = document.getElementById("root");
 
@@ -163,9 +165,8 @@ function createEpisodesSelectionList(listOfEpisodes) {
 
 
 
+function selectOneEpisode(e) {
 
-
-function selectOneEpisode() {
     let listOfEpisodes = allEpisodes;
     let inputElement = document.getElementsByClassName("input")[0];
     inputElement.value = "";
@@ -174,17 +175,20 @@ function selectOneEpisode() {
     paragraphElement.innerHTML = `Displaying your selection`;
 
     let selectList = document.getElementsByClassName("select")[0];
+
     if (selectList.value === "Select an episode") {
         paragraphElement.innerHTML = `Full catalogue`;
         makePageForEpisodes(listOfEpisodes);
+
     } else {
-        let selectedEpisode = [];
-        let index = selectList.value;
-        let episodeObject = listOfEpisodes[index];
-        selectedEpisode.push(episodeObject); console.log(episodeObject)
-        makePageForEpisodes(selectedEpisode);
+        let selected = listOfEpisodes.filter(epi => epi.name === e.target.value)
+        makePageForEpisodes(selected);
     }
 }
+
+
+
+
 
     const getShows = getAllShows(); 
     let showSelect = document.getElementById("show_select")
@@ -214,6 +218,9 @@ function selectOneEpisode() {
     fetchData(showid)
     })
 }
+
+
+
 
 showsAll(getShows)
 
