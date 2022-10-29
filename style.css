@@ -11,6 +11,12 @@
 
 
 
+.button_home {
+  height: 1.5em;
+  padding: 1em;
+}
+
+
 
 #root {
   display: grid;
