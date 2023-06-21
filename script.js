@@ -13,13 +13,6 @@ function formattedEpisode(episode, nameAtStart) {
     }
 }
 
-let buttonHome = document.createElement("button");
-buttonHome.className = "button_home";
-buttonHome.innerHTML = "Home";
-let headerElement = document.getElementsByTagName("header")[0];
-headerElement.appendChild(buttonHome)
-
-
 
 
 
