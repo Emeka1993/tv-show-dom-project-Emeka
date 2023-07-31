@@ -17,13 +17,6 @@ function formattedEpisode(episode, nameAtStart) {
 let allEpisodes = [];
 
 
-
-
-
-
-
-
-
 function setup() {
     let headerElement = document.getElementsByTagName("header")[0];
     
