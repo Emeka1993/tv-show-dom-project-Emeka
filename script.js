@@ -14,8 +14,6 @@ function formattedEpisode(episode, nameAtStart) {
 }
 
 
-
-
 let allEpisodes = [];
 
 
